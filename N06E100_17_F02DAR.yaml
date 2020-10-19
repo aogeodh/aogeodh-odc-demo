@@ -1,0 +1,62 @@
+# UUID of the dataset
+id: f4fa0222-e085-4136-894f-5931e334d762
+$schema: 'https://schemas.opendatacube.org/dataset'
+
+# Product name
+product:
+  name: alos_palsar
+
+properties:
+  eo:platform: ALOS
+  eo:instrument: PALSAR
+  odc:file_format: ENVI
+  
+  odc:processing_datetime: 2020-02-02T08:10:00.000Z  
+  
+  # If it's a single time instance use datetime
+  datetime: 2020-01-01T07:02:54.188Z  # Use UTC
+
+
+# Native CRS, assumed to be the same across all bands
+crs: "epsg:4326"
+
+# Defines a polygon such that, all valid pixels across all bands
+# are inside this polygon.
+geometry:
+  type: Polygon
+  coordinates:
+  - - - 100.0
+      - 5.0
+    - - 100.0
+      - 6.0
+    - - 101.0
+      - 6.0
+    - - 101.0
+      - 5.0
+    - - 100.0
+      - 5.0
+
+# Captures image size, and geo-registration
+grids:
+    default:  # "default" grid must be present
+       shape: [4500, 4500]
+       transform: [0.00022222222222222223, 0, 100, 0, -0.00022222222222222223, 6, 0, 0, 1]
+
+
+# Per band storage information and references into `grids`
+# Bands using "default" grid should not need to reference it
+measurements:
+    hh:
+        path: "http://aogeo-ips.s3-ap-southeast-2.amazonaws.com/jaxa/jaxa_psar_mosaic_1/mekongdelta/2017/N10E100_17_MOS_F02DAR/N06E100_17_sl_HH_F02DAR"
+    hv:
+        path: "http://aogeo-ips.s3-ap-southeast-2.amazonaws.com/jaxa/jaxa_psar_mosaic_1/mekongdelta/2017/N10E100_17_MOS_F02DAR/N06E100_17_sl_HV_F02DAR"
+    date:
+        path: "http://aogeo-ips.s3-ap-southeast-2.amazonaws.com/jaxa/jaxa_psar_mosaic_1/mekongdelta/2017/N10E100_17_MOS_F02DAR/N06E100_17_date_F02DAR"
+    linci:
+        path: "http://aogeo-ips.s3-ap-southeast-2.amazonaws.com/jaxa/jaxa_psar_mosaic_1/mekongdelta/2017/N10E100_17_MOS_F02DAR/N06E100_17_linci_F02DAR"
+    mask:
+        path: "http://aogeo-ips.s3-ap-southeast-2.amazonaws.com/jaxa/jaxa_psar_mosaic_1/mekongdelta/2017/N10E100_17_MOS_F02DAR/N06E100_17_mask_F02DAR"
+
+# Lineage only references UUIDs of direct source datasets
+# Mapping name:str -> [UUID]
+lineage: {}  # set to empty object if no lineage is defined
